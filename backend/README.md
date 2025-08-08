@@ -1,177 +1,159 @@
-# PDF to Word Converter Backend
+# 📄 PDF to Word Converter Backend
 
-A FastAPI-based backend service that converts PDF files to Word documents with **preserved formatting and layout**. The converter maintains the original document structure, font sizes, bold text, and formatting to create fully editable Word documents.
+A **FastAPI-based backend service** that converts PDF files to Word documents with preserved formatting and layout. It intelligently detects document structure, font styles, and layout, ensuring fully editable and high-quality `.docx` output.
 
-## Features
+---
 
-- **Format Preservation**: Maintains original PDF formatting including font sizes, bold text, and layout
-- **Fully Editable**: Creates Word documents that are completely editable
-- **Smart Text Recognition**: Uses PyMuPDF for advanced text extraction with formatting information
-- **OCR Support**: Falls back to OCR for image-based PDFs using Tesseract
-- **Multiple Document Types**: Works with CVs, resumes, reports, articles, and any PDF document
-- **CORS Enabled**: Ready for frontend integration
-- **File Upload Handling**: Automatic cleanup of temporary files
+## 🚀 Features
 
-## Prerequisites
+- ✅ **Format Preservation**  
+  Maintains original formatting (font size, bold, layout) using **PyMuPDF**.
 
-### System Dependencies
+- 📝 **Fully Editable Output**  
+  Generates Word documents that can be easily edited in Microsoft Word or Google Docs.
 
-1. **Python 3.8+**
-2. **Tesseract OCR** - Required for OCR functionality (image-based PDFs)
-3. **Poppler** - Required for PDF to image conversion (OCR fallback)
+- 🧠 **Smart Text Recognition**  
+  Extracts text with formatting info using PyMuPDF (fitz).
 
-### Installing System Dependencies
+- 🔍 **OCR Support**  
+  Automatically falls back to **Tesseract OCR** for scanned or image-based PDFs.
 
-#### Windows:
-1. Install Tesseract: Download from https://github.com/UB-Mannheim/tesseract/wiki
-2. Install Poppler: Download from http://blog.alivate.com.au/poppler-windows/
-3. Add both to your system PATH
+- 📄 **Multi-Document Compatibility**  
+  Works with resumes, reports, articles, CVs, and more.
 
-#### macOS:
+- 🌐 **CORS Enabled**  
+  Built ready for frontend integration.
+
+- 🗂️ **Temporary File Handling**  
+  Automatic cleanup of uploaded and converted files.
+
+---
+
+## ⚙️ Prerequisites
+
+### 🖥️ System Requirements
+- Python 3.8+
+- **Tesseract OCR** (for scanned/image-based PDFs)
+- **Poppler** (used for PDF to image conversion in OCR)
+
+---
+
+## 🧰 Installing System Dependencies
+
+### 🔵 Windows
+- Install **Tesseract**: [Tesseract for Windows](https://github.com/UB-Mannheim/tesseract/wiki)
+- Install **Poppler**: [Poppler for Windows](http://blog.alivate.com.au/poppler-windows/)
+- ➕ Add both installations to your **System PATH**
+
+### 🍎 macOS
 ```bash
 brew install tesseract
 brew install poppler
 ```
 
-#### Ubuntu/Debian:
+### 🐧 Ubuntu/Debian
 ```bash
 sudo apt-get update
 sudo apt-get install tesseract-ocr
 sudo apt-get install poppler-utils
 ```
 
-## Installation
+---
 
-1. **Navigate to the backend directory:**
+## 🛠 Installation Guide
+
+1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
 
-2. **Create a virtual environment:**
-   ```bash
-   python -m venv venv
-   ```
-
-3. **Activate the virtual environment:**
-   - Windows:
+2. Create and activate a virtual environment:
+   - **Windows**:
      ```bash
+     python -m venv venv
      venv\Scripts\activate
      ```
-   - macOS/Linux:
+   - **macOS/Linux**:
      ```bash
+     python3 -m venv venv
      source venv/bin/activate
      ```
 
-4. **Install Python dependencies:**
+3. Install Python dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install fastapi python-docx pytesseract PyMuPDF Pillow uvicorn
    ```
 
-## Running the Application
+---
 
-### Option 1: Using the startup script
-```bash
-python start_server.py
-```
+## ▶️ Running the Application
 
-### Option 2: Using uvicorn directly
+Start the server using `uvicorn`:
+
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-### Option 3: Using the main file
-```bash
-python main.py
+📍 The API will be available at: `http://localhost:8000`
+
+---
+
+## 📬 API Endpoints
+
+### `POST /convert`
+
+- **Description**: Convert a PDF to a Word document
+- **Request**:
+  - Form Data:
+    - `file`: PDF file (required)
+    - `enable_ocr`: boolean (true/false) – optional
+- **Response**: `.docx` file with formatting preserved
+
+---
+
+## 📘 API Documentation
+
+- Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+- Redoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
+---
+
+## 🛠 Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| ❌ OCR not working | Ensure Tesseract is installed and in your PATH. Run `tesseract --version` to check. |
+| ❌ PDF conversion failing | Ensure Poppler is installed. Run `pdftoppm -h` to verify. |
+| ❌ Import errors | Ensure you're inside the virtual environment. Try `pip install -r requirements.txt`. |
+| ❌ Port already in use | Change the port number in the `uvicorn` command. |
+| ❌ Formatting not preserved | Check if the PDF is image-based (no selectable text). OCR will handle it. |
+
+---
+
+## 🧪 Technical Details
+
+- 🔍 **Format-Aware Extraction**: Uses PyMuPDF to extract text along with its style (font size, bold, position).
+- 🎨 **Smart Style Detection**: Applies heading/body styles based on font properties.
+- 📸 **OCR Fallback**: Uses `pytesseract` for scanned PDFs by converting them into images.
+
+---
+
+## 📂 Project Structure
+
+```
+pdf-to-word/
+├── backend/
+│   ├── main.py
+│   ├── utils/
+│   └── ...
+├── frontend/
+└── README.md
 ```
 
-The server will start on `http://localhost:8000`
+---
 
-## API Endpoints
+## 📧 Contact
 
-- `GET /` - Health check endpoint
-- `POST /convert` - Convert PDF to Word document
-  - Accepts: PDF file upload
-  - Returns: Word document (.docx file) with preserved formatting
+For questions or contributions, feel free to open an issue or pull request.
 
-## API Documentation
-
-Once the server is running, you can access:
-- Interactive API docs: `http://localhost:8000/docs`
-- Alternative API docs: `http://localhost:8000/redoc`
-
-## Testing
-
-### Test with a sample PDF:
-```bash
-python test_conversion.py path/to/your/document.pdf
-```
-
-### Test via API:
-```bash
-curl -X POST "http://localhost:8000/convert" \
-     -H "accept: application/json" \
-     -H "Content-Type: multipart/form-data" \
-     -F "file=@your_document.pdf"
-```
-
-## How It Works
-
-1. **Format-Aware Extraction**: Uses PyMuPDF to extract text with formatting information (font size, bold, position)
-2. **Smart Style Detection**: Automatically detects headings, subheadings, and body text based on font properties
-3. **Style Application**: Applies appropriate Word styles to maintain visual hierarchy
-4. **OCR Fallback**: For image-based PDFs, uses Tesseract OCR with basic formatting
-5. **Fully Editable Output**: Creates Word documents that preserve formatting while being completely editable
-
-## Supported Document Types
-
-- **CVs and Resumes**: Maintains section headers, bullet points, and formatting
-- **Reports and Articles**: Preserves headings, paragraphs, and text hierarchy
-- **Forms and Documents**: Keeps layout and text positioning
-- **Any PDF**: Works with any PDF document type
-
-## Troubleshooting
-
-### Common Issues:
-
-1. **OCR not working:**
-   - Ensure Tesseract is installed and in your PATH
-   - Test with: `tesseract --version`
-
-2. **PDF conversion failing:**
-   - Ensure Poppler is installed and in your PATH
-   - Test with: `pdftoppm -h`
-
-3. **Import errors:**
-   - Make sure you're in the virtual environment
-   - Reinstall requirements: `pip install -r requirements.txt`
-
-4. **Port already in use:**
-   - Change the port in `start_server.py` or use a different port
-   - Kill the process using the port: `netstat -ano | findstr :8000`
-
-5. **Formatting not preserved:**
-   - The PDF might be image-based - OCR will be used automatically
-   - Check if the PDF contains selectable text (not just images)
-
-## Development
-
-The application structure:
-- `main.py` - Main FastAPI application with formatting preservation
-- `requirements.txt` - Python dependencies including PyMuPDF
-- `start_server.py` - Development server startup script
-- `test_conversion.py` - Test script for conversion functionality
-- `README.md` - This file
-
-## Technical Details
-
-### Format Preservation Features:
-- **Font Size Detection**: Automatically detects and preserves font sizes
-- **Bold Text Recognition**: Identifies and maintains bold formatting
-- **Heading Detection**: Smart detection of headings based on font size and content
-- **Style Hierarchy**: Creates proper Word document styles for consistency
-- **Layout Preservation**: Maintains text positioning and document structure
-
-### Fallback Strategy:
-1. **Primary**: PyMuPDF for format-aware extraction
-2. **Secondary**: Basic text extraction with simple formatting
-3. **Tertiary**: OCR for image-based PDFs
+---
