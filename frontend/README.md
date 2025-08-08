@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# PDF to Word Converter Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the user interface for the PDF to Word Converter. It is a modern, responsive web application built with React and styled with Tailwind CSS, designed to provide a seamless user experience for uploading files and managing the conversion process.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **File Upload Interface:** A clean and intuitive UI with both drag-and-drop and a standard file browser for PDF uploads.
+- **Conversion Progress:** Real-time feedback and status updates during the file upload and conversion process.
+- **OCR Toggle:** An option to enable or disable Optical Character Recognition (OCR), providing flexibility for different types of PDFs.
+- **Responsive Design:** The layout is fully responsive, ensuring optimal usability on desktop, tablet, and mobile devices.
+- **Custom Notifications:** Uses a custom modal for user feedback and error messages, avoiding intrusive browser alerts.
 
-### `npm start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React:** A JavaScript library for building component-based user interfaces.
+- **Tailwind CSS:** A utility-first CSS framework that enables rapid and consistent styling.
+- **JavaScript (ES6+):** For all application logic, including state management and API calls.
+- **fetch API:** Used for making asynchronous HTTP requests to the backend service.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+- **Node.js:** Version 14 or higher.
+- **npm or yarn:** A package manager for JavaScript dependencies.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+Navigate to the frontend directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+cd frontend
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Install the required Node.js dependencies from package.json:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+# or
+yarn install
+```
 
-### `npm run eject`
+## Running the Application
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Start the development server:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start
+# or
+yarn start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The application will launch in your default web browser, typically at `http://localhost:3000`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## File Structure
 
-## Learn More
+The project follows a standard React application structure:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `src/`: Contains all the source code for the React components, logic, and styling.
+- `App.js`: The main root component of the application.
+- `index.js`: The entry point for the React application, which mounts the App component to the DOM.
+- `public/`: Stores static assets such as the main `index.html` file and images.
+- `package.json`: Lists the project's dependencies and defines scripts for running the application.
+- `tailwind.config.js`: The configuration file for Tailwind CSS.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## API Integration
 
-### Code Splitting
+The frontend communicates with the backend API using a POST request to the `/convert` endpoint. It sends the PDF file and the OCR toggle state to the server and handles the returned `.docx` file as a blob, triggering a download.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Troubleshooting
 
-### Analyzing the Bundle Size
+### Common Issues:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Cannot connect to the backend:**
+- Ensure the backend server is running on `http://localhost:8000`.
+- Check for CORS errors in the browser console.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**`npm start` fails:**
+- Make sure all dependencies are installed by running `npm install`.
+- Verify that Node.js and npm are correctly installed and configured in your system's PATH.
